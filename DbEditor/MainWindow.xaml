@@ -1,0 +1,29 @@
+﻿<Window x:Class="DbEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DbEditor"        
+        x:Name="mw"
+        Title="MainWindow" Height="422.8" Width="821" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="5,5"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+
+        <local:RecordWindow DockPanel.Dock="Left" Accessory="{Binding TableName}" AccessoryTypes="{Binding ItemAttributes}"/>
+
+        <StackPanel DockPanel.Dock="Left">
+            <Button Style="{StaticResource ButtonStyle}" Content="Update" Command="{Binding UpdateDbCommand}" Height="23"/>
+            <Button Style="{StaticResource ButtonStyle}" Content="Set Table Destination" Command="{Binding ChangeDbFilePathCommand}" Height="24"/>
+            <ComboBox ItemsSource="{Binding AccessoryTables}" SelectedItem="{Binding SelectedTable}" HorizontalAlignment="Left" Width="120" Margin="5,5" />
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Right">
+            <Image Grid.Column="1" Source="{Binding DisplayedAccessory}" HorizontalAlignment="Left" Height="272" VerticalAlignment="Top" Width="272" />
+            <Label Content="Preview" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="68" FontWeight="Bold" FontFamily="Verdana"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1" Grid.Column ="1" ItemsSource="{Binding DisplayView}" SelectedItem="{Binding SelectedRow}" FontSize="14" SelectionMode="Single"/>
+    </DockPanel>
+</Window>
